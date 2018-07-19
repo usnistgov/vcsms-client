@@ -1,0 +1,20 @@
+package gov.nist.healthcare.vcsms.service;
+
+import gov.nist.healthcare.vcsms.domain.DistributionApplyStatusRequest;
+import gov.nist.healthcare.vcsms.domain.DistributionAvailableRequestStatus;
+import gov.nist.healthcare.vcsms.domain.DistributionDownloadStatusRequest;
+import gov.nist.healthcare.vcsms.domain.DistributionPendingDownloadRequestStatus;
+import gov.nist.healthcare.vcsms.domain.DistributionRequestStatus;
+import gov.nist.healthcare.vcsms.domain.DistributionSubscribeRequest;
+import gov.nist.healthcare.vcsms.domain.RESTClientInfo;
+
+public interface VCSMSClient {
+	
+	public DistributionAvailableRequestStatus getAllAvailablePackageLists();
+	public DistributionRequestStatus postPackageApplyState(DistributionApplyStatusRequest distributionApplyStatusRequest);
+	public DistributionRequestStatus postPackageDownloadState(DistributionDownloadStatusRequest distributionDownloadStatusRequest);
+	public DistributionRequestStatus postPackageSubscribe(DistributionSubscribeRequest distributionSubscribeRequest);
+	public DistributionRequestStatus postPackageUnsubscribe(DistributionSubscribeRequest distributionSubscribeRequest);
+	public DistributionPendingDownloadRequestStatus postPendingDownloadPackages(RESTClientInfo requestClientInfo);
+
+}
