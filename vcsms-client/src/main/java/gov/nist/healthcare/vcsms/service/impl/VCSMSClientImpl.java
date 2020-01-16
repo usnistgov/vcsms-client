@@ -20,12 +20,12 @@ public class VCSMSClientImpl implements VCSMSClient {
 
 	private ClientConfiguration configuration;
 	private RestTemplate wire;
-	public final String ALL_AVAILABLE_PACKAGE_LISTS = "http://%s/available/%s";
-	public final String PACKAGE_APPLY_STATE = "http://%s/applystate";
-	public final String PACKAGE_DOWNLOAD_STATE = "http://%s/downloadstate";
-	public final String PACKAGE_SUBSCRIBE = "http://%s/subscribe";
-	public final String PACKAGE_UNSUBSCRIBE = "http://%s/unsubscribe";
-	public final String POST_PENDING_DOWNLOAD_PACKAGES = "http://%s/pending/%s";
+	public final String ALL_AVAILABLE_PACKAGE_LISTS = "%s://%s/available/%s";
+	public final String PACKAGE_APPLY_STATE = "%s://%s/applystate";
+	public final String PACKAGE_DOWNLOAD_STATE = "%s://%s/downloadstate";
+	public final String PACKAGE_SUBSCRIBE = "%s://%s/subscribe";
+	public final String PACKAGE_UNSUBSCRIBE = "%s://%s/unsubscribe";
+	public final String POST_PENDING_DOWNLOAD_PACKAGES = "%s://%s/pending/%s";
 	
 	
 	public VCSMSClientImpl(ClientConfiguration configuration) {
@@ -43,6 +43,7 @@ public class VCSMSClientImpl implements VCSMSClient {
 	}
 
 	public DistributionAvailableRequestStatus getAllAvailablePackageLists() {
+		System.out.println(getURL(ALL_AVAILABLE_PACKAGE_LISTS));
 		return wire.getForObject(getURL(ALL_AVAILABLE_PACKAGE_LISTS), DistributionAvailableRequestStatus.class);
 	}
 
@@ -59,15 +60,17 @@ public class VCSMSClientImpl implements VCSMSClient {
 	}
 
 	public DistributionRequestStatus postPackageUnsubscribe(DistributionSubscribeRequest distributionSubscribeRequest) {
+		System.out.println(getURL(PACKAGE_UNSUBSCRIBE));
 		return wire.postForObject(getURL(PACKAGE_UNSUBSCRIBE), distributionSubscribeRequest, DistributionRequestStatus.class);
 	}
 
 	public DistributionPendingDownloadRequestStatus postPendingDownloadPackages(RESTClientInfo requestClientInfo) {
+		System.out.println(getURL(POST_PENDING_DOWNLOAD_PACKAGES));
 		return wire.postForObject(getURL(POST_PENDING_DOWNLOAD_PACKAGES), requestClientInfo, DistributionPendingDownloadRequestStatus.class);
 	}
 	
 	private String getURL(String str){
-		return String.format(str, configuration.getRoot(), configuration.getGroupMnemonic());
+		return String.format(str, configuration.getProtocol(), configuration.getRoot(), configuration.getGroupMnemonic());
 	}
 
 	public ClientConfiguration getConfiguration() {

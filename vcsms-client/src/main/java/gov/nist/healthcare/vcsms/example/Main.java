@@ -11,7 +11,7 @@ public class Main {
 
 	public static void main(String[] args) throws ResourceNotFoundException, IOException {
 		NISTVCSMSClientImpl client = new NISTVCSMSClientImpl(
-				new ClientConfiguration("{ROOT_PATH}", 
+				new ClientConfiguration("https","{ROOT_PATH}", 
 										"{GROUP_MNEMONIC}", 
 										"{NODE_ID}", 
 										"{FTP_HOST}", 

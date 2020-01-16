@@ -2,6 +2,7 @@ package gov.nist.healthcare.vcsms.domain;
 
 public class ClientConfiguration {
 	
+	private String protocol;
 	private String root;
 	private String groupMnemonic;
 	private String nodeID;
@@ -9,9 +10,10 @@ public class ClientConfiguration {
 	private String ftpUserName;
 	private String ftpUserPassword;
 	
-	public ClientConfiguration(String root, String groupMnemonic, String nodeID, String ftpHost, String ftpUserName,
+	public ClientConfiguration(String protocol, String root, String groupMnemonic, String nodeID, String ftpHost, String ftpUserName,
 			String ftpUserPassword) {
 		super();
+		this.protocol = protocol;
 		this.root = root;
 		this.groupMnemonic = groupMnemonic;
 		this.nodeID = nodeID;
@@ -55,6 +57,12 @@ public class ClientConfiguration {
 	}
 	public void setFtpUserPassword(String ftpUserPassword) {
 		this.ftpUserPassword = ftpUserPassword;
+	}
+	public String getProtocol() {
+		return protocol;
+	}
+	public void setProtocol(String protocol) {
+		this.protocol = protocol;
 	}
 
 }
